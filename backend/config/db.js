@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async()=>{
     try{
-        let conn = await mongoose.connect("mongodb://localhost:27017/mernProject");
+        let conn = await mongoose.connect(process.env.mongodb_URI);     //For security purposes
         console.log(`Connected to db at ${conn.connection.host}`);
     }
     catch(err){
