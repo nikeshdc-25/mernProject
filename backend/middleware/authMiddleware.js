@@ -10,8 +10,8 @@ const authCheck = asyncHandler (async(req, res, next)=>{
         throw err;
     }
     try{
-        let {userID} = jwt.verify(token, process.env.JWT_SECRET);
-        let user = await User.findById(userID);
+        let {userId} = jwt.verify(token, process.env.JWT_SECRET);
+        let user = await User.findById(userId);
         req.user = {
             name: user.name,
             email: user.email,

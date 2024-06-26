@@ -4,6 +4,7 @@ import errorHandler from './middleware/errorMiddleware.js';
 import logger from './middleware/loggerMiddleware.js';
 //routers import
 import userRouter from "./routes/userRouter.js";
+import CookieParser from 'cookie-parser';
 
 
 
@@ -11,6 +12,7 @@ import userRouter from "./routes/userRouter.js";
 const app = express();
 //middlewares
 app.use(express.json())
+app.use(CookieParser())
 app.use(logger);
 //routes
 app.use("/api/v1/users", userRouter);
