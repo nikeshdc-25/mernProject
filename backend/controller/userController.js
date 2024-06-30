@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import createToken from "../utils/tokenUtil.js";
 import asyncHandler from "../middleware/asyncHandler.js";
+import ApiError from "../utils/apiError.js";
 // import bcrypt from "bcryptjs";
 
 //@desc register new user
@@ -60,5 +61,59 @@ const getUser = asyncHandler(async(req, res)=>{
     res.send(users);
 })
 
+//@desc gets user details
+//route /api/v1/user/profile
+//@access private
+const getUserProfile = asyncHandler(async (req, res) => {
+    res.send(req.user);
+});
 
-export {signup, login, logout, getUser};
+//@desc update user details
+//route /api/v1/user/update
+//@access private
+const updateProfile = asyncHandler(async(req, res)=>{
+    let id = req.user._id;
+    let user = await User.findById(id);
+    if(user){
+        user.username = req.body.username || user.username;
+        user.email = req.body.email || user.email;
+        if(req.body.password){                      //If no password is given, no need to be hashed again.
+            user.password = req.body.password;      //If new password is given, it should be hashed.
+        }
+        let updatedUser = await user.save();
+        res.send({message: "User Updated Successfully!", user: updatedUser});
+    }
+    else{
+        throw new ApiError(404, "User not found!");
+    }
+})
+
+
+const updateUser = asyncHandler(async(req, res)=>{
+    let id = req.params.id;
+    let user = await User.findById(id);
+    if(user){
+        user.username = req.body.username || user.username;
+        user.email = req.body.email || user.email;
+        user.isAdmin = Boolean(req.body.isAdmin)
+        let updatedUser = await user.save();
+        res.send({message: "User Updated", user: updatedUser})
+    }
+    else throw new ApiError(404, "User not found!")
+})
+
+const deleteUser = asyncHandler(async (req, res) => {
+    let id = req.params.id;
+    let user = await User.findById(id);
+    if (!user) {
+        throw new ApiError(404, "User not found!");
+    }
+    if (user.isAdmin) {
+        throw new ApiError(403, "Cannot delete an admin user!");
+    }
+    await User.findByIdAndDelete(id);
+    res.send({ message: "User deleted Successfully!" });
+});
+
+
+export {signup, login, logout, getUser, getUserProfile, updateProfile, updateUser, deleteUser};
