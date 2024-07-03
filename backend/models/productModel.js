@@ -8,10 +8,9 @@ const reviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
-    }
-},
-{timestamps: true}
-);
+    },
+});
+
 
 const productSchema = new mongoose.Schema({
     user:{              //Foreign Key from User
@@ -32,7 +31,7 @@ const productSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ["Electronics", "Clothing", "Vape", "Electronics", "Kitchenware", "Furniture"]
+        enum: ["Electronics", "Clothing", "Vape", "Electric", "Kitchenware", "Furniture"]
     },
     price:{
         type: Number,
@@ -42,14 +41,18 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    rating: Number,
-    numReview: Number,
-    reviews: {reviewSchema}
+    rating: {
+        type: Number,
+        default: 0
+    },
+    numReview: {
+        type: Number,
+        default: 0
+    },
+    reviews: [reviewSchema]
 },
 {timestamps: true}
 );
-
-
 
 const Product = mongoose.model("Product", productSchema);
 export default Product;
