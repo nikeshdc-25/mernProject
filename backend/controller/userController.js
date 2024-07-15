@@ -2,14 +2,21 @@ import User from "../models/userModel.js";
 import createToken from "../utils/tokenUtil.js";
 import asyncHandler from "../middleware/asyncHandler.js";
 import ApiError from "../utils/apiError.js";
+import { isEmail, isStrong } from "../utils/validator.js";
 // import bcrypt from "bcryptjs";
 
 //@desc register new user
 //route /api/v1/user/signup
 //@access public
 const signup = asyncHandler(async(req, res, next)=>{
-    let {email} = req.body;
+    let {email, password} = req.body;
     let userExists = await User.findOne({email})     //{email(from userSchema): useremail(from frontend)}
+    if(!isEmail(email)){
+        throw new ApiError(404, "Invalid Email!")
+    }
+    if(!isStrong(password)){
+        throw new ApiError(404, "You Wickling, include 1 Uppercase, Symbols and 1 Number in your password!")
+    }
     if(userExists){
         let err = new Error(`User with email ${email} already exists!`);
         err.status = 400;       //400 for bad requests

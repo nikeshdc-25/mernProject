@@ -2,9 +2,9 @@ import bcrypt from 'bcryptjs';
 
 const users = [
     {
-        "username": "Nepali",
-        "email": "nepali@gmail.com",
-        "password": bcrypt.hashSync("nepali", 10),
+        "username": "Nikesh Dhakal",
+        "email": "nikeshdhakal@gmail.com",
+        "password": bcrypt.hashSync("userAdmin", 10),
         "isAdmin": true,
     },
     {

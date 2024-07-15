@@ -6,12 +6,16 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon --env-file=.env backend/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "data:load": "node backend/seeder.js",
+    "data:clear": "node backend/seeder.js -D"
   },
   "author": "nikesh",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^5.3.3",
+    "colors": "^1.4.0",
     "cookie-parser": "^1.4.6",
     "cookieparser": "^0.1.0",
     "express": "^4.19.2",
