@@ -1,0 +1,6 @@
+.product-title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space:inherit;
+    color: rgb(210, 0, 0);
+}

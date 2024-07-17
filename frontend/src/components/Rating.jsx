@@ -48,7 +48,7 @@ function Rating({ value, text }) {
           <FaRegStar />
         )}
       </span>
-      <span className="rating-text">{text} reviews</span>
+      <span className="rating-text px-2">({text} reviews)</span>
     </div>
   );
 }

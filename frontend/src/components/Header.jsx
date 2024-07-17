@@ -2,34 +2,35 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import logo from '../assets/react.svg'
 import {  FaShoppingCart, FaUser, FaHouseUser, FaHeart } from "react-icons/fa";
 import './Header.css'
-    
-
-
+import {NavLink} from 'react-router-dom'
 
 function Header(){
     return (
         <header>
             <Navbar variant='dark' bg='dark' expand='md' collapseOnSelect>
+                <NavLink to='/' className='navbar-brand'>
                     <Navbar.Brand className='px-2'>
-                        <img src={logo} alt='logo' /> E-Commerce    
-                    </Navbar.Brand>
+                            <img src={logo} alt='logo' /> E-Commerce    
+                        </Navbar.Brand>
+                </NavLink>
+                    
                 <Container>
                     <Navbar.Toggle aria-controls='navbar' />
                     
                     <Navbar.Collapse id='navbar'>
                         <Nav className='ms-auto'>
-                            <Nav.Link className='header-underline'>
+                            <NavLink to='' className='header-underline nav-link'>
                                 <FaHouseUser /> Home
-                            </Nav.Link>
-                            <Nav.Link className='header-underline'>
+                            </NavLink>
+                            <NavLink to='/cart' className='header-underline nav-link'>
                                 <FaShoppingCart /> Cart<div className='nav-cart-count'>0</div> 
-                            </Nav.Link>
-                            <Nav.Link className='header-underline'>
+                            </NavLink>
+                            <NavLink to='/wishlist' className='header-underline nav-link'>
                                 <FaHeart /> Wishlist
-                            </Nav.Link>
-                            <Nav.Link className='header-underline'>
+                            </NavLink>
+                            <NavLink to='/login' className='header-underline nav-link'>
                                 <FaUser /> Login
-                            </Nav.Link>
+                            </NavLink>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
