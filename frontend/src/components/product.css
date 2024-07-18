@@ -4,3 +4,11 @@
     white-space:inherit;
     color: rgb(210, 0, 0);
 }
+.product-card{
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+.product-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.8);
+}

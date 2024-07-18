@@ -5,8 +5,6 @@ import { FaGithub, FaFacebookF , FaInstagram } from "react-icons/fa";
 function Footer(){
     let currentYear = new Date().getFullYear();
     return(
-        <footer>
-            <Container>
             <footer class="site-footer">
                 <div class="container">
                     <div class="row">
@@ -39,8 +37,6 @@ function Footer(){
                     </div>
                 </div>
             </footer>
-            </Container>
-        </footer>
     )
 }
 
