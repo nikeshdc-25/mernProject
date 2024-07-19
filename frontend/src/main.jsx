@@ -4,7 +4,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  Route,
+  Route
 } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
@@ -19,8 +19,8 @@ import ProductPage from "./pages/ProductPage.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="" element={<HomePage />} />
-      <Route path="/product" element={<ProductPage />} />
+      <Route path="" element={<HomePage />} loader={dataLoader}/>
+      <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/login" element={<LoginPage />} />
