@@ -16,7 +16,7 @@ const ProductPage = () => {
   return (
     <div className="container my-5">
       <div className="row">
-      <Link to='/' >Go Back</Link>
+      <span className='d-flex justify-content-end'><Link to='/' ><button className='btn btn-danger'>Go Back</button></Link></span>
       <div className="col-md-6">
           <img src={product.image} alt={product.name} className="img-fluid" />
         </div>

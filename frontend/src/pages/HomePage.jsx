@@ -25,4 +25,9 @@ const products = useLoaderData();
     </>
   );
 };
+export const dataLoader = async() =>{
+let res = await fetch("/api/v1/products");
+let data = await res.json();
+return data;
+}
 export default HomePage;
