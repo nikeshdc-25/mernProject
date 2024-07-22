@@ -17,7 +17,7 @@ function Product({product, addToCart}){
         <Card.Text as='div'>
           <Rating value={product.rating} text={product.numReviews}>{product.name}</Rating>
         </Card.Text>
-        <Card.Text as="h3">${product.price} ${product.numReviews}</Card.Text>
+        <Card.Text as="h3">${product.price}</Card.Text>
       </Card.Body>
       <CardFooter>
       <button className='btn btn-success'>Add to Cart</button>
