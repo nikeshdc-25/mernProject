@@ -3,8 +3,10 @@ import {Card, CardFooter} from 'react-bootstrap'
 import Rating from './Rating'
 import './product.css';
 import {Link} from 'react-router-dom'
+import { FaEye } from "react-icons/fa";
 
-function Product({product, addToCart}){
+
+function Product({product}){
   return(
     <Card className='my-3 product-card'>
       <Link to={`/product/${product._id}`} title={`${product.name}`} className='nav-link'>
@@ -20,7 +22,11 @@ function Product({product, addToCart}){
         <Card.Text as="h3">${product.price}</Card.Text>
       </Card.Body>
       <CardFooter>
-      <button className='btn btn-success'>Add to Cart</button>
+        <div className='d-flex justify-content-start gap-2'>
+        <button className='btn btn-success'>Add to Cart</button>
+        <button className='btn btn-warning'>Quick Pay</button>
+        <button className='btn ms-auto'><FaEye /></button>
+        </div>
       </CardFooter>
     </Card>
   )
