@@ -7,6 +7,7 @@ import "./productpage.css";
 import { useDispatch } from "react-redux";
 import { addItem } from "../slices/cartSlice";
 import { Form, ListGroup } from "react-bootstrap";
+import Rating from "../components/Rating";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -49,7 +50,8 @@ const ProductPage = () => {
             In Stock: {product.countInStock > 0 ?product.countInStock :<b className="mx-2" style={{ color: "red" }}>Out of Stock</b>}
           </h4>
           <h4>
-            Rating: {product.rating} ({product.numReviews} reviews)
+          <Rating value={product.rating} text={product.numReviews}>{product.name}</Rating>
+
           </h4>
           <ListGroup.Item>
             <Form.Control
