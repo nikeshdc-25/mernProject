@@ -13,7 +13,7 @@ const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(1);
   const dispatch = useDispatch();
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState(1);
   const navigate = useNavigate();
 
 
