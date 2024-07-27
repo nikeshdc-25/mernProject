@@ -1,12 +1,28 @@
-import { Container, Navbar, Nav, Badge } from "react-bootstrap";
+import { Container, Navbar, Nav, Badge, NavDropdown } from "react-bootstrap";
 import logo from "../assets/react.svg";
-import { FaShoppingCart, FaUser, FaHouseUser, FaHeart } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaUser,
+  FaHouseUser,
+  FaHeart,
+  FaBell,
+} from "react-icons/fa";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../slices/authSlice";
+import { toast } from "react-toastify";
 
 function Header() {
   const { cartItems } = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate("/login");
+    toast.warn(`Logged Out.`);
+  };
   return (
     <header>
       <Navbar variant="dark" bg="dark" expand="md" collapseOnSelect>
@@ -27,15 +43,30 @@ function Header() {
               <NavLink to="/cart" className="header-underline nav-link">
                 <FaShoppingCart /> Cart{" "}
                 {cartItems.length > 0 && (
-                    <Badge bg='success' pill>{cartItems.length}</Badge>
+                  <Badge bg="success" pill>
+                    {cartItems.length}
+                  </Badge>
                 )}
               </NavLink>
               <NavLink to="/wishlist" className="header-underline nav-link">
-                <FaHeart /> Wishlist    
+                <FaHeart /> Wishlist
               </NavLink>
-              <NavLink to="/login" className="header-underline nav-link">
-                <FaUser /> Login
-              </NavLink>
+              <NavDropdown title={<FaBell />} id="Notify-dropdown" />
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id="Profile-dropdown">
+                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <NavDropdown.Item>Activity</NavDropdown.Item>
+                  <NavDropdown.Item>Promo Code</NavDropdown.Item>
+                  <NavDropdown.Item>Setting</NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <NavLink to="/login" className="header-underline nav-link">
+                  <FaUser /> Login
+                </NavLink>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -108,7 +108,9 @@ const CartPage = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Button>Checkout</Button>
+                <Link to='../login?redirect=/shipping'>
+                  <Button>Checkout</Button>
+                </Link>
               </ListGroup.Item>
             </ListGroup>
           </Col>
