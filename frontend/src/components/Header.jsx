@@ -5,24 +5,36 @@ import {
   FaUser,
   FaHouseUser,
   FaHeart,
-  FaBell,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import "./Header.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { IoMdSettings } from "react-icons/io";
+import { FiActivity } from "react-icons/fi";
+import { CgProfile } from "react-icons/cg";
+import { useUserLogoutMutation } from "../slices/userApiSlice";
 
 function Header() {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
+  const [userLogout, { isLoading }] = useUserLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logoutHandler = () => {
-    dispatch(logout());
-    navigate("/login");
-    toast.warn(`Logged Out.`);
+
+  const logoutHandler = async () => {
+    try {
+      let res = await userLogout().unwrap();
+      dispatch(logout()); // Dispatch the logout action
+      toast.warn(res.message);
+      navigate("/login");
+    } catch (err) {
+      toast.error(err.data.error);
+    }
   };
+
   return (
     <header>
       <Navbar variant="dark" bg="dark" expand="md" collapseOnSelect>
@@ -51,15 +63,19 @@ function Header() {
               <NavLink to="/wishlist" className="header-underline nav-link">
                 <FaHeart /> Wishlist
               </NavLink>
-              <NavDropdown title={<FaBell />} id="Notify-dropdown" />
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="Profile-dropdown">
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
-                  <NavDropdown.Item>Activity</NavDropdown.Item>
-                  <NavDropdown.Item>Promo Code</NavDropdown.Item>
-                  <NavDropdown.Item>Setting</NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <CgProfile /> Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <FiActivity /> Activity
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <IoMdSettings /> Setting
+                  </NavDropdown.Item>
                   <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
+                    <FaSignOutAlt /> Logout
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
@@ -74,4 +90,5 @@ function Header() {
     </header>
   );
 }
+
 export default Header;

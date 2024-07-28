@@ -16,6 +16,9 @@ import Wishlist from "./pages/Wishlist.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import { store } from "./store.js";
 import {Provider} from 'react-redux'
+import ShippingPage from "./pages/ShippingPage.jsx";
+import PrivateRouter from "./components/PrivateRoute.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 
 // const router = createBrowserRouter([
 const router = createBrowserRouter(
@@ -26,6 +29,10 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<CartPage />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path='' element={<PrivateRouter/>}>
+      <Route path="/shipping" element={<ShippingPage />} />
+      <Route path="/profile" element={<ProfilePage/>} />
+      </Route>
     </Route>
   )
 );
