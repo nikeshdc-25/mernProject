@@ -52,7 +52,7 @@ const ShippingPage = () => {
             <FormGroup controlId="Phone" className="my-3">
               <Form.Label>Tel/Phone</Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 placeholder="Enter your phone no..."
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}

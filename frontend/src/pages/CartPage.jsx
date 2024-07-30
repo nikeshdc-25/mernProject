@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Col, ListGroup, Row, Image, Form, Button } from "react-bootstrap";
+import {
+  Col,
+  ListGroup,
+  Row,
+  Image,
+  Form,
+  Button,
+  Toast,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../slices/cartSlice";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Message from "../components/Message";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, shippingCharge, totalPrice, itemPrice } = useSelector(
+    (state) => state.cart
+  );
   const dispatch = useDispatch();
   const changeCartQty = (item, qty) => {
     dispatch(addItem({ ...item, qty }));
@@ -15,6 +26,19 @@ const CartPage = () => {
   const removeCartItem = (id) => {
     dispatch(removeItem(id));
   };
+
+  const [promo, setPromo] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const promoHandler = (e) => {
+    if (promo === "123456") {
+      setDiscount(5);
+      toast.success("Promo Applied!");
+    } else {
+      setDiscount(0);
+      toast.error("Invalid promo code");
+    }
+  };
+
   return (
     <>
       {cartItems.length === 0 ? (
@@ -79,17 +103,27 @@ const CartPage = () => {
                 <Row>
                   <Col>Net Total</Col>
                   <Col>
-                    $
-                    {cartItems
-                      .reduce((acc, item) => acc + item.qty * item.price, 0)
-                      .toFixed(2)}
+                    {discount === 5 ? (
+                      <>
+                        <s>${itemPrice.toFixed(2)}</s> $
+                        <b style={{color: 'green'}}>{(itemPrice - discount).toFixed(2)}</b>
+                      </>
+                    ) : (
+                      `$${itemPrice.toFixed(2)}`
+                    )}
                   </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping Charge</Col>
-                  <Col>$5</Col>
+                  <Col>
+                    {totalPrice >= 100 ? (
+                      <em>*Free Shipping</em>
+                    ) : (
+                      `$${shippingCharge}`
+                    )}
+                  </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -98,17 +132,37 @@ const CartPage = () => {
                     <strong>Total</strong>
                   </Col>
                   <Col>
-                    <strong>
-                      $
-                      {cartItems
-                        .reduce((acc, item) => acc + item.qty * item.price, 5)
-                        .toFixed(2)}
-                    </strong>
+                    <strong>${totalPrice - discount}</strong>
                   </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Link to='../login?redirect=/shipping'>
+                <Row>
+                  <Col>Promo:</Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Promo code..."
+                      maxLength="6"
+                      value={promo}
+                      onChange={(e) => setPromo(e.target.value)}
+                    ></input>
+                  </Col>
+                  <Col>
+                    <Button
+                      className="btn btn-success"
+                      onClick={promoHandler}
+                      disabled={discount == 5}
+                    >
+                      Apply
+                    </Button>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Link to="../login?redirect=/shipping">
                   <Button>Checkout</Button>
                 </Link>
               </ListGroup.Item>
