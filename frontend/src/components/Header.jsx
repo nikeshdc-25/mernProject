@@ -6,6 +6,10 @@ import {
   FaHouseUser,
   FaHeart,
   FaSignOutAlt,
+  FaUserCog,
+  FaBoxes,
+  FaUserEdit,
+  FaSitemap,
 } from "react-icons/fa";
 import "./Header.css";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -65,7 +69,7 @@ function Header() {
               </NavLink>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="Profile-dropdown">
-                  <NavDropdown.Item onClick={ () => navigate('/profile') }>
+                  <NavDropdown.Item onClick={() => navigate("/profile")}>
                     <CgProfile /> Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item>
@@ -82,6 +86,36 @@ function Header() {
                 <NavLink to="/login" className="header-underline nav-link">
                   <FaUser /> Login
                 </NavLink>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown
+                  title={<FaUserCog />}
+                  id="admin-routes"
+                  variant="dark"
+                  bg="dark"
+                >
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/admin/orders");
+                    }}
+                  >
+                    <FaSitemap /> Orders
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/admin/users");
+                    }}
+                  >
+                    <FaUserEdit /> Users
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    onClick={() => {
+                      navigate("/admin/products");
+                    }}
+                  >
+                    <FaBoxes /> Products
+                  </NavDropdown.Item>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>

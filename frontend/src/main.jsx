@@ -4,7 +4,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  Route
+  Route,
 } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
@@ -15,34 +15,43 @@ import LoginPage from "./pages/LoginPage.jsx";
 import Wishlist from "./pages/Wishlist.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import { store } from "./store.js";
-import {Provider} from 'react-redux'
+import { Provider } from "react-redux";
 import ShippingPage from "./pages/ShippingPage.jsx";
 import PrivateRouter from "./components/PrivateRoute.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import OrderPage from "./pages/OrderPage.jsx";
 import ConfirmOrder from "./pages/ConfirmOrder.jsx";
+import OrdersPage from "./pages/admin/OrdersPage.jsx";
+import ProductsPage from "./pages/admin/ProductsPage.jsx";
+import UsersPage from "./pages/admin/UsersPage.jsx";
+import AdminRouter from "./components/AdminRoute.jsx";
 
 // const router = createBrowserRouter([
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="" element={<HomePage />} loader={dataLoader}/>
+      <Route path="" element={<HomePage />} loader={dataLoader} />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path='' element={<PrivateRouter/>}>
-      <Route path="/shipping" element={<ShippingPage />} />
-      <Route path="/profile" element={<ProfilePage/>} />
-      <Route path="/placeorder" element={<OrderPage/>} />
-      <Route path="/confirmorder/:id" element={<ConfirmOrder/>} />
+      <Route path="" element={<PrivateRouter />}>
+        <Route path="/shipping" element={<ShippingPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/placeorder" element={<OrderPage />} />
+        <Route path="/confirmorder/:id" element={<ConfirmOrder />} />
+      </Route>
+      <Route path="" element={<AdminRouter />}>
+        <Route path="admin/orders" element={<OrdersPage />} />
+        <Route path="admin/products" element={<ProductsPage />} />
+        <Route path="admin/users" element={<UsersPage />} />
       </Route>
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-<Provider store={store}>
-<RouterProvider router={router} />
-</Provider>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );
