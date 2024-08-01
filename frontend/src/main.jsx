@@ -19,6 +19,8 @@ import {Provider} from 'react-redux'
 import ShippingPage from "./pages/ShippingPage.jsx";
 import PrivateRouter from "./components/PrivateRoute.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import OrderPage from "./pages/OrderPage.jsx";
+import ConfirmOrder from "./pages/ConfirmOrder.jsx";
 
 // const router = createBrowserRouter([
 const router = createBrowserRouter(
@@ -32,6 +34,8 @@ const router = createBrowserRouter(
       <Route path='' element={<PrivateRouter/>}>
       <Route path="/shipping" element={<ShippingPage />} />
       <Route path="/profile" element={<ProfilePage/>} />
+      <Route path="/placeorder" element={<OrderPage/>} />
+      <Route path="/confirmorder/:id" element={<ConfirmOrder/>} />
       </Route>
     </Route>
   )

@@ -6,7 +6,6 @@ import {
   Image,
   Form,
   Button,
-  Toast,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../slices/cartSlice";
@@ -152,7 +151,7 @@ const CartPage = () => {
                   </Col>
                   <Col>
                     <Button
-                      className="btn btn-success"
+                      className="btn btn-success my-1"
                       onClick={promoHandler}
                       disabled={discount == 5}
                     >

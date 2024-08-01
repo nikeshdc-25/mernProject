@@ -16,18 +16,22 @@ const addOrder = asyncHandler(async (req, res) => {
     totalPrice,
     shippingAddress,
   });
-  res.send({ message: "Order Placed with id " + order._id });
+  res.send({ message: "Order Placed with id " + order._id, orderId: order._id });
 });
 
 const getOrders = asyncHandler(async (req, res) => {
   let orders = await Order.find({}).populate("user", "name email -_id");    //Makes object with name and email, excluding _id.
   res.send(orders);
 });
+
+
 const getOrderById = asyncHandler(async (req, res) => {
   let id = req.params.id;
   let order = await Order.findById(id).populate("user", "name email -_id");
   res.send(order);
 });
+
+
 const getMyOrders = asyncHandler(async (req, res) => {
   let orders = await Order.find({ user: req.user._id });
   res.send(orders);

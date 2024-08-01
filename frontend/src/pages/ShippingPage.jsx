@@ -3,19 +3,22 @@ import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { saveShippingAddress } from "../slices/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const ShippingPage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
-  const {shippingAddress} = useSelector(state => state.cart);
+  const { shippingAddress } = useSelector((state) => state.cart);
   const [recipient, setRecipient] = useState(userInfo.name);
-  const [address, setAddress] = useState(shippingAddress.address || '');
-  const [city, setCity] = useState(shippingAddress.city || '');
-  const [phone, setPhone] = useState(shippingAddress.phone || '');
+  const [address, setAddress] = useState(shippingAddress.address || "");
+  const [city, setCity] = useState(shippingAddress.city || "");
+  const [phone, setPhone] = useState(shippingAddress.phone || "");
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({recipient, address, city, phone}))
+    dispatch(saveShippingAddress({ recipient, address, city, phone }));
+    navigate("/placeorder");
   };
 
   return (
@@ -59,7 +62,7 @@ const ShippingPage = () => {
               ></Form.Control>
             </FormGroup>
             <Button type="submit" variant="primary" className="mt-2">
-              Save
+              Continue
             </Button>
           </FormGroup>
         </Form>

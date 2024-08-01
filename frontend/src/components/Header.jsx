@@ -34,13 +34,6 @@ function Header() {
       toast.error(err.data.error);
     }
   };
-  const profileHandler = async () => {
-    try {
-      navigate("/profile");
-    } catch (err) {
-      toast.error("Failed to load profile.");
-    }
-  };
 
   return (
     <header>
@@ -72,7 +65,7 @@ function Header() {
               </NavLink>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="Profile-dropdown">
-                  <NavDropdown.Item onClick={profileHandler}>
+                  <NavDropdown.Item onClick={ () => navigate('/profile') }>
                     <CgProfile /> Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item>
