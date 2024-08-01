@@ -65,7 +65,7 @@ const login = asyncHandler(async (req, res, next) => {
 //@access private
 const logout = asyncHandler(async (req, res) => {
   res.clearCookie("jwt");
-  res.send({message: "Logout Successfully!"});
+  res.send({ message: "Logout Successfully!" });
 });
 
 //@desc get  user
@@ -84,7 +84,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 //@desc update user details
-//route /api/v1/user/update
+//route /api/v1/user/updateprofile
 //@access private
 const updateProfile = asyncHandler(async (req, res) => {
   let id = req.user._id;
@@ -97,7 +97,12 @@ const updateProfile = asyncHandler(async (req, res) => {
       user.password = req.body.password; //If new password is given, it should be hashed.
     }
     let updatedUser = await user.save();
-    res.send({ message: "User Updated Successfully!", user: updatedUser });
+    res.send({ message: "User Updated Successfully!",
+       user: {
+        name: updatedUser.username,
+        email: updatedUser.email,
+        isAdmin: updateUser.isAdmin
+    }});
   } else {
     throw new ApiError(404, "User not found!");
   }
