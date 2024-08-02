@@ -1,12 +1,34 @@
-import { ListGroup, Row, Col, Card, Image, Badge } from "react-bootstrap";
+import { ListGroup, Row, Col, Card, Image, Badge, Form } from "react-bootstrap";
 import Message from "../components/Message";
 import { useParams, Link } from "react-router-dom";
-import { useGetOrderByIdQuery } from "../slices/orderSlice";
+import {
+  useGetOrderByIdQuery,
+  useUpdateOrderStatusMutation,
+} from "../slices/orderSlice";
 import { orderStatusColor } from "../Utils/orderStatusColors";
+import { useSelector } from "react-redux";
+import { FaEdit } from "react-icons/fa";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-function ConfirmOrder() {
+function OrderPage() {
+  const [isEdit, setIsEdit] = useState(false);
   let { id } = useParams();
-  let { data: order, isLoading, error } = useGetOrderByIdQuery(id);
+  let { data: order, isLoading, refetch, error } = useGetOrderByIdQuery(id);
+  const [updateOrderStatus, { isLoading: updateLoading }] =
+    useUpdateOrderStatusMutation();
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const updateStatusHandler = async (id, status) => {
+    try {
+      let resp = await updateOrderStatus({ id, status }).unwrap();
+      refetch();
+      setIsEdit(false);
+      toast.success(resp.message);
+    } catch (err) {
+      toast.error(err.data.error);
+    }
+  };
 
   return isLoading ? (
     <h1>Loading...</h1>
@@ -18,18 +40,15 @@ function ConfirmOrder() {
         <ListGroup variant="flush">
           <ListGroup.Item>
             <h3>Shipping</h3>
-             <p>
-              <strong>Name: </strong>
-              {order.shippingAddress.recipient} <br />
-              <strong>Phone: </strong>
-              {order.shippingAddress.phone} <br />
-              <strong>Address: </strong>
-              {order.shippingAddress.address} <br />
-              <strong>City: </strong>
-              {order.shippingAddress.city} <br />
+            <p>
+              Name: {order.shippingAddress.recipient} |{" "}
+              {order.shippingAddress.phone}
+              <br />
+              Address: {order.shippingAddress.address} |{" "}
+              {order.shippingAddress.city}
             </p>
             {order.isDelivered ? (
-              <Message>Delivered at {order.deliveredAt}</Message>
+              <Message variant='success'>Delivered at {order.deliveredAt}</Message>
             ) : (
               <Message variant="danger">Not Delivered</Message>
             )}
@@ -38,7 +57,7 @@ function ConfirmOrder() {
             <h3>Payment</h3>
             <p>Mode: COD</p>
             {order.isPaid ? (
-              <Message>Paid ${order.totalPrice}</Message>
+              <Message variant='success'>Paid ${order.totalPrice}</Message>
             ) : (
               <Message variant="danger">Not Paid</Message>
             )}
@@ -90,11 +109,30 @@ function ConfirmOrder() {
             <ListGroup.Item>
               <Row>
                 <Col>Status</Col>
-                <Col>
-                  <Badge bg={orderStatusColor[order.status]}>
-                    {order.status}
-                  </Badge>
+                <Col md={6}>
+                  {isEdit ? (
+                    <Form.Control
+                      as="select"
+                      onChange={(e) =>
+                        updateStatusHandler(order._id, e.target.value)
+                      }
+                    >
+                      <option>Pending</option>
+                      <option>In Progress</option>
+                      <option>Cancelled</option>
+                      <option>Delivered</option>
+                    </Form.Control>
+                  ) : (
+                    <Badge bg={orderStatusColor[order.status]}>
+                      {order.status}
+                    </Badge>
+                  )}
                 </Col>
+                {userInfo && userInfo.isAdmin && !order.isDelivered && (
+                  <Col>
+                    <FaEdit onClick={() => setIsEdit(true)} />
+                  </Col>
+                )}
               </Row>
             </ListGroup.Item>
           </ListGroup>
@@ -104,4 +142,4 @@ function ConfirmOrder() {
   );
 }
 
-export default ConfirmOrder;
+export default OrderPage;
