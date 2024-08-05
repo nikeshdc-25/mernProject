@@ -24,13 +24,13 @@ const addOrder = asyncHandler(async (req, res) => {
 });
 
 const getOrders = asyncHandler(async (req, res) => {
-  let orders = await Order.find({}).populate("user", "name email -_id"); //Makes object with name and email, excluding _id.
+  let orders = await Order.find({}).populate("user", "username email -_id"); //Makes object with name and email, excluding _id.
   res.send(orders);
 });
 
 const getOrderById = asyncHandler(async (req, res) => {
   let id = req.params.id;
-  let order = await Order.findById(id).populate("user", "name email -_id");
+  let order = await Order.findById(id).populate("user", "username email -_id");
   res.send(order);
 });
 

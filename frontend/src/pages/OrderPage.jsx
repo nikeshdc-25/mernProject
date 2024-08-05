@@ -54,7 +54,7 @@ function OrderPage() {
                     <Image src={item.image} fluid rounded />
                   </Col>
                   <Col>
-                    <Link to={`/product/${item._id}`}>
+                    <Link to={`/product/${item._id}`} className="nav-link">
                       <strong>{item.name}</strong>
                     </Link>
                   </Col>

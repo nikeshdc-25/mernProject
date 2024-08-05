@@ -6,7 +6,16 @@ import ApiError from "../utils/apiError.js";
 // @route   POST /api/v1/products/addproduct
 // @access  Private/Admin
 const addProduct = asyncHandler(async (req, res) => {
-    let product = await Product.create({...req.body, user: req.user._id});
+    // let product = await Product.create({...req.body, user: req.user._id});
+    let product = await Product.create({
+        user: req.user._id,
+        name: 'Sample Name',
+        description: 'Sample Description',
+        image: '/images/sample.jpg',
+        price: 1,
+        brand: 'Sample Brand',
+        category: 'Sample Category', 
+    })
     res.send({message: `Product created successfully!`, product});
 });
 
@@ -90,7 +99,7 @@ const addUserReview = asyncHandler(async(req, res)=>{
         comment,
         user: req.user._id
      });
-     product.numReview = product.reviews.length;
+     product.numReviews = product.reviews.length;
      let totalRating = product.reviews.reduce((acc, review) => acc +  review.rating, 0); 
      product.rating = (totalRating/product.reviews.length).toFixed(2);
      await product.save();

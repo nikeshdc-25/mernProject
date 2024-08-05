@@ -1,11 +1,44 @@
 import React from "react";
-import { useGetProductsQuery } from "../../slices/productSlice";
+import {
+  useAddProductMutation,
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "../../slices/productSlice";
 import { Row, Col, Button, Table } from "react-bootstrap";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaPlusCircle, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const ProductsPage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
+  const [addProduct, { isLoading: productLoading, refetch }] =
+    useAddProductMutation();
+  const [deleteProduct, { isLoading: productDelete }] =
+    useDeleteProductMutation();
+
+  const addProductHandler = async () => {
+    try {
+      let res = await addProduct().unwrap();
+      toast.success(res.message);
+      refetch();
+    } catch (err) {
+      toast.error(err.data.error);
+    }
+  };
+
+  const deleteProductHandler = async (id) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      try {
+        let res = await deleteProduct(id).unwrap();
+        toast.success(res.message);
+        refetch();
+      } catch (err) {
+        toast.error(err.data.error);
+      }
+    }
+  };
+
   return (
     <>
       <Row className="align-items-center mb-3">
@@ -13,8 +46,8 @@ const ProductsPage = () => {
           <h3>Products</h3>
         </Col>
         <Col className="text-end">
-          <Button size="sm" variant="dark">
-            <FaEdit className="mb-1" /> Create Product
+          <Button size="sm" variant="dark" onClick={addProductHandler}>
+            <FaPlusCircle className="mb-1" /> Create Product
           </Button>
         </Col>
       </Row>
@@ -41,15 +74,25 @@ const ProductsPage = () => {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
-                  <td>{product.price}</td>
+                  <td>${product.price}</td>
                   <td>{product.brand}</td>
                   <td>{product.category}</td>
                   <td>{product.countInStock}</td>
                   <td>
-                    <Button size="sm" variant="light">
+                    <Button
+                      as={Link}
+                      size="sm"
+                      variant="light"
+                      to={`/admin/products/${product._id}/edit`}
+                    >
                       <FaEdit />
                     </Button>
-                    <Button size="sm" variant="danger" className="ms-2">
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      className="ms-2"
+                      onClick={() => deleteProductHandler(product._id)}
+                    >
                       <FaTrash style={{ color: "white" }} />
                     </Button>
                   </td>

@@ -14,7 +14,7 @@ function App() {
     <Container className="my-3">
       <Outlet/>
     </Container>
-    <Footer />
+    <Footer className='mt-5'/>
     <ToastContainer />
     </>
   )
