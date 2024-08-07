@@ -94,7 +94,7 @@ const addUserReview = asyncHandler(async(req, res)=>{
     if(alreadyReviewed) throw new ApiError(404, "Already Reviewed!")
      let {rating, comment} = req.body;
      product.reviews.push({
-        name: req.user.name,
+        name: req.user.username,
         rating,
         comment,
         user: req.user._id

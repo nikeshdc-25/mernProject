@@ -13,6 +13,6 @@ router.route('/:id')
     .delete(authCheck, checkAdmin, deleteProduct)
     .put(authCheck, checkAdmin, updateProduct);
 router.get('/topproducts/:count', getTopProduct);
-router.put('/addreview/:id', authCheck, addUserReview);       //Product id
+router.put('/:id/addreview', authCheck, addUserReview);       //Product id
 
 export default router;
