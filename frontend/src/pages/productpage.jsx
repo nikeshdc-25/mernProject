@@ -142,7 +142,7 @@ function ProductPage() {
               )}
               <h2 className="my-4">Add Review</h2>
               {userInfo ? (
-                 !userInfo.isAdmin && (
+                 userInfo.isAdmin && (
                   <Form onSubmit={addReviewHandler}>
                     <Form.Group controlId="rating" className="my-3">
                       <Form.Label>Rating</Form.Label>
@@ -174,7 +174,7 @@ function ProductPage() {
                 )
               ) : (
                 <Message>
-                  Please <Link to="/signin">Signin</Link> to review
+                  Please <Link to="/login">Signin</Link> to review
                 </Message>
               )}
             </Col>

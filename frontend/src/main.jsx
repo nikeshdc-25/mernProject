@@ -25,13 +25,24 @@ import OrdersPage from "./pages/admin/OrdersPage.jsx";
 import ProductsPage from "./pages/admin/ProductsPage.jsx";
 import UsersPage from "./pages/admin/UsersPage.jsx";
 import AdminRouter from "./components/AdminRoute.jsx";
-import ProductsEditPage from './pages/admin/ProductEditPage.jsx'
+import ProductsEditPage from "./pages/admin/ProductEditPage.jsx";
 
 // const router = createBrowserRouter([
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="" element={<HomePage />} loader={dataLoader} />
+      <Route
+        path="search/:keyword"
+        element={<HomePage />}
+        loader={dataLoader}
+      />
+
+      <Route
+        path="page/:pageNumber"
+        element={<HomePage />}
+        loader={dataLoader}
+      />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/wishlist" element={<Wishlist />} />
@@ -46,6 +57,11 @@ const router = createBrowserRouter(
         <Route path="admin/orders" element={<OrdersPage />} />
         <Route path="admin/products" element={<ProductsPage />} />
         <Route path="admin/users" element={<UsersPage />} />
+        <Route
+          path="admin/products/page/:pageNumber"
+          element={<ProductsPage />}
+        />
+
         <Route path="admin/products/:id/edit" element={<ProductsEditPage />} />
       </Route>
     </Route>

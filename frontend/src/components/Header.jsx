@@ -20,6 +20,7 @@ import { IoMdSettings } from "react-icons/io";
 import { FiActivity } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { useUserLogoutMutation } from "../slices/userApiSlice";
+import SearchBox from "./SearchBox";
 
 function Header() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -47,12 +48,12 @@ function Header() {
             <img src={logo} alt="logo" /> eCart
           </Navbar.Brand>
         </NavLink>
-
         <Container>
           <Navbar.Toggle aria-controls="navbar" />
 
           <Navbar.Collapse id="navbar">
             <Nav className="ms-auto">
+              <SearchBox/>
               <NavLink to="" className="header-underline nav-link">
                 <FaHouseUser /> Home
               </NavLink>
