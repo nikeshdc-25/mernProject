@@ -11,7 +11,7 @@
     "data:load": "node backend/seeder.js",
     "data:clear": "node backend/seeder.js -D",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "node/backend/index.js"
   },
   "author": "nikesh",
@@ -26,6 +26,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.3",
     "multer": "^1.4.5-lts.1",
+    "react-helmet-async": "^2.0.5",
+    "react-paginate": "^8.2.0",
     "react-router-bootstrap": "^0.26.3"
   },
   "devDependencies": {

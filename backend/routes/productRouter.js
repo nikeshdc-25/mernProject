@@ -7,12 +7,13 @@ const router = express.Router();
 router.route('/')
     .get(getProducts)
     .post(authCheck, checkAdmin, addProduct);
+    router.get("/topproducts", getTopProduct);
+
 
 router.route('/:id')
     .get(getProductById)
     .delete(authCheck, checkAdmin, deleteProduct)
     .put(authCheck, checkAdmin, updateProduct);
-router.get('/topproducts/:count', getTopProduct);
 router.put('/:id/addreview', authCheck, addUserReview);       //Product id
 
 export default router;

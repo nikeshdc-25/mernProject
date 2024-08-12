@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { addItem } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import Meta from "../components/Meta";
 import {
   useAddReviewMutation,
   useGetProductByIdQuery,
@@ -58,6 +58,7 @@ function ProductPage() {
         <Message variant="danger">{error?.data?.error || error.error}</Message>
       ) : (
         <>
+          <Meta title={product.name} description={product.description} />
           <Link className="btn btn-light" to="/">
             Go Back
           </Link>
@@ -127,7 +128,7 @@ function ProductPage() {
             </Col>
           </Row>
           <Row className="my-3">
-            <Col md={6} className="reviews">
+            <Col md={6} className="reviews" key={product.reviews.length}>
               <h2>Customer Reviews</h2>
               {product.reviews.length > 0 ? (
                 product.reviews.map((review) => (
@@ -142,7 +143,7 @@ function ProductPage() {
               )}
               <h2 className="my-4">Add Review</h2>
               {userInfo ? (
-                 userInfo.isAdmin && (
+                !userInfo.isAdmin && (
                   <Form onSubmit={addReviewHandler}>
                     <Form.Group controlId="rating" className="my-3">
                       <Form.Label>Rating</Form.Label>

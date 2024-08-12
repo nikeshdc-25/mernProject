@@ -151,7 +151,7 @@ const CartPage = () => {
                   </Col>
                   <Col>
                     <Button
-                      className="btn btn-success my-1"
+                      variant="success"
                       onClick={promoHandler}
                       disabled={discount == 5}
                     >

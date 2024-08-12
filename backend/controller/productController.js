@@ -109,10 +109,11 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @route   /api/v1/products/topproducts/:count
 // @access  Public
 const getTopProduct = asyncHandler(async (req, res) => {
-  let count = Number(req.body.params);
-  let products = await Product.find({}).sort({ rating: -1 }).limit(count); //-1 is descending order
+  let limit = 3;
+  let products = await Product.find({}).sort({ rating: -1 }).limit(limit);
   res.send(products);
 });
+
 
 const addUserReview = asyncHandler(async (req, res) => {
   let id = req.params.id;

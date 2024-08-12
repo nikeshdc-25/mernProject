@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardFooter } from "react-bootstrap";
+import { Button, Card, CardFooter } from "react-bootstrap";
 import Rating from "./Rating";
 import "./product.css";
 import { Link } from "react-router-dom";
@@ -28,8 +28,8 @@ function Product({ product }) {
       </Card.Body>
       <CardFooter>
         <div className="d-flex justify-content-start gap-2">
-          <button className="btn btn-success">Add to Cart</button>
-          <button className="btn btn-warning">Quick Pay</button>
+          <Button variant='success'>Add to Cart</Button>
+          <Button variant='warning'>Quick Pay</Button>
           <button className="btn ms-auto">
             <FaEye />
           </button>

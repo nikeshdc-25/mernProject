@@ -45,7 +45,7 @@ function Header() {
       <Navbar variant="dark" bg="dark" expand="md" collapseOnSelect>
         <NavLink to="/" className="navbar-brand">
           <Navbar.Brand className="px-2">
-            <img src={logo} alt="logo" /> eCart
+            <img src={logo} alt="logo" /> ECommerce
           </Navbar.Brand>
         </NavLink>
         <Container>

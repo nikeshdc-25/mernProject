@@ -7,27 +7,51 @@ import {
   Route,
 } from "react-router-dom";
 import App from "./App.jsx";
-import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 import HomePage, { dataLoader } from "./pages/HomePage.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 import CartPage from "./pages/CartPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import Wishlist from "./pages/Wishlist.jsx";
-import ProductPage from "./pages/ProductPage.jsx";
-import { store } from "./store.js";
 import { Provider } from "react-redux";
+import { store } from "./store.js";
 import ShippingPage from "./pages/ShippingPage.jsx";
-import PrivateRouter from "./components/PrivateRoute.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
-import OrderPage from "./pages/OrderPage.jsx";
-import ConfirmOrder from "./pages/ConfirmOrder.jsx";
-import OrdersPage from "./pages/admin/OrdersPage.jsx";
-import ProductsPage from "./pages/admin/ProductsPage.jsx";
-import UsersPage from "./pages/admin/UsersPage.jsx";
-import AdminRouter from "./components/AdminRoute.jsx";
-import ProductsEditPage from "./pages/admin/ProductEditPage.jsx";
+import WishlistPage from "./pages/WishlistPage.jsx";
 
+import OrderPage from "./pages/OrderPage.jsx";
+import AdminRoute from "./components/AdminRoute.jsx";
+import OrdersPage from "./pages/admin/OrdersPage.jsx";
+import ProductsListPage from "./pages/admin/ProductsPage.jsx";
+import ProductEditPage from "./pages/admin/ProductEditPage.jsx";
+import { HelmetProvider } from "react-helmet-async";
+import ProductsPage from "./pages/admin/ProductsPage.jsx";
 // const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//     children: [
+//       {
+//         path: "",
+//         element: <HomePage />,
+//       },
+//       {
+//         path: "product",
+//         element: <ProductPage />,
+//       },
+//       {
+//         path: "cart",
+//         element: <CartPage />,
+//       },
+//       {
+//         path: "signin",
+//         element: <LoginPage />,
+//       },
+//     ],
+//   },
+// ]);
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -37,39 +61,43 @@ const router = createBrowserRouter(
         element={<HomePage />}
         loader={dataLoader}
       />
-
+      <Route
+        path="search/:keyword/page/:pageNumber"
+        element={<HomePage />}
+        loader={dataLoader}
+      />
       <Route
         path="page/:pageNumber"
         element={<HomePage />}
         loader={dataLoader}
       />
-      <Route path="/product/:id" element={<ProductPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/wishlist" element={<Wishlist />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="" element={<PrivateRouter />}>
-        <Route path="/shipping" element={<ShippingPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/placeorder" element={<OrderPage />} />
-        <Route path="/confirmorder/:id" element={<ConfirmOrder />} />
+      <Route path="product/:id" element={<ProductPage />} />
+      <Route path="cart" element={<CartPage />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="shipping" element={<ShippingPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="wishlist" element={<WishlistPage />} />
+        <Route path="confirmorder" element={<OrderPage />} />
+        <Route path="order/:id" element={<OrderPage />} />
       </Route>
-      <Route path="" element={<AdminRouter />}>
+      <Route path="" element={<AdminRoute />}>
         <Route path="admin/orders" element={<OrdersPage />} />
         <Route path="admin/products" element={<ProductsPage />} />
-        <Route path="admin/users" element={<UsersPage />} />
         <Route
           path="admin/products/page/:pageNumber"
-          element={<ProductsPage />}
+          element={<ProductsListPage />}
         />
-
-        <Route path="admin/products/:id/edit" element={<ProductsEditPage />} />
+        <Route path="admin/product/:id/edit" element={<ProductEditPage />} />
       </Route>
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+  <HelmetProvider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </HelmetProvider>
 );
