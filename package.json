@@ -12,7 +12,7 @@
     "data:clear": "node backend/seeder.js -D",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "node/backend/index.js"
+    "start": "node backend/index.js"
   },
   "author": "nikesh",
   "license": "ISC",
