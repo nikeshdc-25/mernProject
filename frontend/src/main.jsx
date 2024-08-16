@@ -72,6 +72,7 @@ const router = createBrowserRouter(
         element={<HomePage />}
         loader={dataLoader}
       />
+      <Route path="product/:id" element={<ProductPage />} />
       <Route path="cart" element={<CartPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="" element={<PrivateRoute />}>

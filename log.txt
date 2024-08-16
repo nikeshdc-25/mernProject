@@ -2,3 +2,10 @@
 [2024-8-16 T 18:55:3]::GET /api/v1/products/topproducts ::1 65 ms Status:304
 [2024-8-16 T 18:55:3]::GET /api/v1/products? ::1 120 ms Status:304
 [2024-8-16 T 18:55:5]::GET /api/v1/products ::1 120 ms Status:304
+[2024-8-16 T 18:57:26]::GET /api/v1/products ::1 152 ms Status:304
+[2024-8-16 T 18:57:26]::GET /api/v1/products/topproducts ::1 71 ms Status:304
+[2024-8-16 T 18:57:26]::GET /api/v1/products? ::1 126 ms Status:304
+[2024-8-16 T 18:57:28]::GET /api/v1/products/66b5ab8b8b37ea3ec81fdf29 ::1 124 ms Status:304
+[2024-8-16 T 18:58:25]::GET /api/v1/products ::1 117 ms Status:304
+[2024-8-16 T 18:58:25]::GET /api/v1/products/topproducts ::1 57 ms Status:304
+[2024-8-16 T 18:58:25]::GET /api/v1/products? ::1 137 ms Status:304
