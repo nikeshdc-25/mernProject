@@ -115,7 +115,7 @@ function ProductPage() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
-                    variant="success"
+                    variant="secondary"
                     disabled={product.countInStock <= 0}
                     onClick={() =>
                       addToCartHandler({ ...product, qty: Number(qty) })
@@ -128,7 +128,7 @@ function ProductPage() {
             </Col>
           </Row>
           <Row className="my-3">
-            <Col md={6} className="reviews" key={product.reviews.length}>
+            <Col md={6} className="reviews">
               <h2>Customer Reviews</h2>
               {product.reviews.length > 0 ? (
                 product.reviews.map((review) => (

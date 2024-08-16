@@ -29,3 +29,11 @@
 [2024-8-16 T 19:38:50]::GET /api/v1/products/topproducts ::1 67 ms Status:304
 [2024-8-16 T 19:38:50]::GET /api/v1/products? ::1 125 ms Status:304
 [2024-8-16 T 19:38:55]::POST /api/v1/users/logout ::1 1 ms Status:200
+[2024-8-16 T 19:47:35]::GET /api/v1/products ::1 148 ms Status:304
+[2024-8-16 T 19:47:35]::GET /api/v1/products/topproducts ::1 68 ms Status:304
+[2024-8-16 T 19:47:35]::GET /api/v1/products? ::1 129 ms Status:304
+[2024-8-16 T 19:47:37]::GET /api/v1/products ::1 123 ms Status:304
+[2024-8-16 T 19:47:37]::GET /api/v1/products/topproducts ::1 63 ms Status:304
+[2024-8-16 T 19:47:37]::GET /api/v1/products? ::1 137 ms Status:304
+[2024-8-16 T 19:47:38]::GET /api/v1/products/66b5ab8b8b37ea3ec81fdf29 ::1 147 ms Status:304
+[2024-8-16 T 19:47:42]::GET /api/v1/products ::1 138 ms Status:304
