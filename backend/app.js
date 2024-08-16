@@ -34,11 +34,12 @@ if (process.env.NODE_ENV === "production") {
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
   });
-} else{
-    app.get("/", (req, res)=>{
-        res.send("Server is up and running");
-    })
+} else {
+  app.get("/", (req, res) => {
+    res.send("Server is up and running");
+  });
 }
+
 
 //error handlers
 app.use(notFoundHandler);
