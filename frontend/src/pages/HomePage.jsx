@@ -13,6 +13,7 @@ const HomePage = () => {
     pageNumber,
     keyword,
   });
+  console.log(data);
 
   return (
     <>
