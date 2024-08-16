@@ -18,6 +18,7 @@ const app = express();
 
 //middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(CookieParser());
 app.use(logger);
 app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
