@@ -20,6 +20,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import WishlistPage from "./pages/WishlistPage.jsx";
 
+import ConfirmOrder from './pages/ConfirmOrder.jsx'
 import OrderPage from "./pages/OrderPage.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
 import OrdersPage from "./pages/admin/OrdersPage.jsx";
@@ -78,8 +79,8 @@ const router = createBrowserRouter(
         <Route path="shipping" element={<ShippingPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="wishlist" element={<WishlistPage />} />
-        <Route path="confirmorder" element={<OrderPage />} />
-        <Route path="order/:id" element={<OrderPage />} />
+        <Route path="order" element={<OrderPage />} />
+        <Route path="confirmorder/:id" element={<ConfirmOrder />} />
       </Route>
       <Route path="" element={<AdminRoute />}>
         <Route path="admin/orders" element={<OrdersPage />} />

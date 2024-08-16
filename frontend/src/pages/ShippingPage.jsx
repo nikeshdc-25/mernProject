@@ -18,7 +18,7 @@ const ShippingPage = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ recipient, address, city, phone }));
-    navigate("/placeorder");
+    navigate("/order");
   };
 
   return (
