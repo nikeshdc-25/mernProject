@@ -25,3 +25,7 @@
 [2024-8-16 T 19:15:1]::GET /images/camera.jpg ::1 1 ms Status:304
 [2024-8-16 T 19:15:3]::GET /api/v1/products/66b5ab8b8b37ea3ec81fdf2a ::1 154 ms Status:304
 [2024-8-16 T 19:15:4]::GET /api/v1/products ::1 139 ms Status:304
+[2024-8-16 T 19:38:50]::GET /api/v1/products ::1 140 ms Status:304
+[2024-8-16 T 19:38:50]::GET /api/v1/products/topproducts ::1 67 ms Status:304
+[2024-8-16 T 19:38:50]::GET /api/v1/products? ::1 125 ms Status:304
+[2024-8-16 T 19:38:55]::POST /api/v1/users/logout ::1 1 ms Status:200
