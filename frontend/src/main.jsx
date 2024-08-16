@@ -20,7 +20,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import WishlistPage from "./pages/WishlistPage.jsx";
 
-import ConfirmOrder from './pages/ConfirmOrder.jsx'
+import ConfirmOrder from "./pages/ConfirmOrder.jsx";
 import OrderPage from "./pages/OrderPage.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
 import OrdersPage from "./pages/admin/OrdersPage.jsx";
@@ -72,7 +72,6 @@ const router = createBrowserRouter(
         element={<HomePage />}
         loader={dataLoader}
       />
-      <Route path="product/:id" element={<ProductPage />} />
       <Route path="cart" element={<CartPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="" element={<PrivateRoute />}>
