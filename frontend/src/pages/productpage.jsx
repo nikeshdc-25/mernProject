@@ -88,7 +88,7 @@ function ProductPage() {
                   <Row>
                     <Col>Price</Col>
                     <Col>
-                      <strong>{product.price}</strong>
+                      <strong>${product.price}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -97,7 +97,7 @@ function ProductPage() {
                     <Col>Status</Col>
                     <Col>
                       <strong>
-                        {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
+                        {product.countInStock > 0 ? "In Stock" : <b style={{color: "red"}}>Out of Stock</b>}
                       </strong>
                     </Col>
                   </Row>
