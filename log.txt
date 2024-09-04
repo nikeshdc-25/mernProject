@@ -199,3 +199,7 @@
 [2024-8-25 T 12:1:5]::GET /api/v1/products ::1 80 ms Status:304
 [2024-8-25 T 12:1:5]::GET /api/v1/products/topproducts ::1 42 ms Status:304
 [2024-8-25 T 12:1:5]::GET /api/v1/products? ::1 88 ms Status:304
+[2024-9-4 T 7:17:10]::GET /api/v1/products ::1 99 ms Status:200
+[2024-9-4 T 7:17:10]::GET /api/v1/products/topproducts ::1 46 ms Status:200
+[2024-9-4 T 7:17:10]::GET /api/v1/products? ::1 79 ms Status:200
+[2024-9-4 T 7:17:21]::GET /api/v1/products ::1 83 ms Status:304
